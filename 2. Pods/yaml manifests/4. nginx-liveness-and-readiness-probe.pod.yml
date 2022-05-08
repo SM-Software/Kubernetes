@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-with-health-probe
+  labels:
+    app: nginx-pod-with-liveness-probe
+spec:
+  containers:
+  -  name: nginx-probe-container-httpgetaction
+     image: nginx:alpine
+     ports:
+       - containerPort: 80
+     livenessProbe:
+       httpGet:
+         path: /index.html # Can put a custom api for health check
+         port: 80  # Check index.html on port 80
+       initialDelaySeconds: 15   # Wait for 15 seconds for the response
+       timeoutSeconds: 2
+       periodSeconds: 5 # Check every 5 seconds
+       failureThreshold: 1  # Allow 1 failure before failing the pod
+     readinessProbe:
+       httpGet:
+         path: /index.html
+         port: 80
+       initialDelaySeconds: 2
+       periodSeconds: 5
