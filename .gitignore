@@ -1,0 +1,11 @@
+
+Applications/Deploy-mediawiki-to-AKS/ACR and AKS - Terraform/.terraform.lock.hcl
+Applications/Deploy-mediawiki-to-AKS/ACR and AKS - Terraform/.terraform.lock.hcl
+*.hcl
+*.exe
+*.backup
+Applications/Deploy-mediawiki-to-AKS/ACR and AKS - Terraform/terraform.tfstate
+*.pub
+Applications/Deploy-mediawiki-to-AKS/ACR and AKS - Terraform/ssh-keys
+*.hcl
+Applications/Deploy-mediawiki-to-AKS/ACR and AKS - Terraform/.terraform.lock.hcl
