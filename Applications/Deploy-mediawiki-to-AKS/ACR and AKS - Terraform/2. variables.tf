@@ -43,6 +43,5 @@ variable "windows_admin_password"{
 }
 
 variable "ssh_public_key"{
-  default = "C:\\Users\\v-saummi\\Code Folder\\Kubernetes\\Applications\\Deploy-mediawiki-to-AKS\\ACR and AKS - Terraform\\ssh-keys.pub"
   type=string
 }
