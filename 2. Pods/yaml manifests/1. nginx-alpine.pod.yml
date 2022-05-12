@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: nginx-pod
   labels: # Labels are often used to connect two or more resources
-    app: nginx-pod
+    app: nginx-app
 spec:
   containers:
   -  name: nginx-container
