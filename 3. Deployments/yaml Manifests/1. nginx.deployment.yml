@@ -1,0 +1,29 @@
+apiVersion: apps/v1   # Refer the doc to know the version 
+# We can metion here the replcaset if we are creating the replicaset, 
+# but since the dpeloyment will take care of replicaset by themselves we are creating the deployment directly
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx-alpine-deployment-app
+    tier: frontend
+spec:   # Define the specs for the deployment
+  replicas: 3
+  selector:   # build a relation between the pod and the Depoyment using the match labels: app
+    matchLabels:
+      tier: frontend
+  template:   # Define the pod specification below the template, in the same file or refer to the pod.yml separately
+    metadata:
+      name: nginx-pod
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx-deployment-container
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 128Mi # 128MB
+            cpu: "330m" # 330 millicpu (0.33  or 33% of the cpu)
