@@ -9,6 +9,7 @@ metadata:
     tier: frontend
 spec:   # Define the specs for the deployment
   replicas: 3
+  minReadySeconds: 10   # Time to wait to make sure container has not crashed
   selector:   # build a relation between the pod and the Depoyment using the match labels: app
     matchLabels:
       tier: frontend
