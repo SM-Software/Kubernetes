@@ -43,5 +43,6 @@ variable "windows_admin_password"{
 }
 
 variable "ssh_public_key"{
+  default = "C:\\Users\\v-saummi\\Downloads\\ssh-pub-keys.pub"
   type=string
 }
