@@ -1,0 +1,24 @@
+# The problem with hostPath volume is that if the node is deleted for some reason than the files will be permanently deleted.
+# To resolve this kind of issue we can use the cloud file services, ex: Azure File
+# To know how to set up the environment for using Azure File in AKS refer the link below:
+# https://docs.microsoft.com/en-us/azure/aks/azure-files-volume
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-with-volumes
+  labels:
+    app: nginx-azureFile-volumes
+spec:
+  volumes:
+    - name: azure_files # name with which we want to refer the volume
+      azureFile:
+        secretName: <azure-secret-name>
+        shareName: <share-name>
+        readOnly: false # setting readonly permission to false
+  containers:
+  - name: nginx-app
+    image: nginx:alpine
+    volumeMounts:
+      - mountPath: /data/storage
+        name: azure_files

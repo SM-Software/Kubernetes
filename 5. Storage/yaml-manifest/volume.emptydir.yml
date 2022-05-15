@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-with-volumes
+  labels:
+    app: nginx-emptydir-volumes
+spec:
+  volumes:
+    - name: html
+      emptyDir: {}
+  containers:
+    - name: nginx-app
+      image: nginx:alpine
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: nginx-html-mount-path
+          readOnly: true
+    - name: html-updater
+      image: alpine
+      command: ["/bin/sh", -c]
+      args:
+        - while true; do data >> /html/index.html
+            sleep 10; done
+      volumeMounts:
+      - name: nginx-html-mount-path # the name should be same as that od declared in the above container so that it will use the same volume
+        mountPath: /html # tells container where to mount the volume that is created inside this container
