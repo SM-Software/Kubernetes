@@ -44,7 +44,7 @@ To know how to set up the environemtn for using Azure File in AKS refer the [lin
 - Special types of volumes where we can store the secrets and key value pair, which pods can access with kubernetes resources
 
 #### persistentVolumeClaim
-- provides pods witha more persistent storage options that is abstracted form the details.
+- provides pods with a more persistent storage options that is abstracted form the details.
 
 #### Cloud: clsuter-wide storage
 - [Azure file share](https://docs.microsoft.com/en-us/azure/aks/azure-files-volume)

@@ -1,0 +1,17 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azure_file_share_sc # name of the storage class that will be used to link the PVC to the SC
+provisioner: kubernetes.io/azure-file
+# To see the different mountOptions refer this: https://en.wikipedia.org/wiki/File-system_permissions
+mountOptions:
+  - dir_mode=0777
+  - file_mdoe=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+  - actimeo=30
+parameters:
+  skuName: standard_LRS # Storage sku to be used
+  shareName: pod_aks_file_share # Name of the file share to be created

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx_with_dynamic_provisioning
+  labels:
+    name: dynamic_azure_file
+spec:
+  containers:
+  - name: pod_for_file_share
+    image: nginx:alpine
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: "256Mi"
+        cpu: "250m"
+    volumeMounts:
+      - mountPath: "mnt/azure" # Path to which you would like to mount the volume to inside the pod.
+        name: azure_file_share_vol
+    volumes:
+      - name: azure_file_share_vol
+        persistentVolumeClaim:
+          claimName: azure_file_share_pvc # name of the claim that is defined in the PVC file.

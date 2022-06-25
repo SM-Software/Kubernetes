@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azure_file_share_pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azure_file_share_sc # this storage class name will be used to create the storage class for the dynamic provisioning of the storage
+  resource:
+    requests:
+      storage: 5Gi

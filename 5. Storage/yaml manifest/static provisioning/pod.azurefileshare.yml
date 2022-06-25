@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx_pod
+  labels:
+    name: nginx_pod
+spec:
+  containers:
+  - name: nginx_pod
+    image: nginx:alpine
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 3308
+    volumeMounts:
+      - name: blobDisk01
+        mountPath: /mnt/blobdisk
+    volumes:
+    - name: blobDisk01
+      persistentVolumeClaim:
+        claimName: azure_file_share_pvc
+
