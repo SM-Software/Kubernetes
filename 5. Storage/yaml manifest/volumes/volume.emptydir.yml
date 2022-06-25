@@ -22,5 +22,5 @@ spec:
         - while true; do data >> /html/index.html
             sleep 10; done
       volumeMounts:
-      - name: nginx-html-mount-path # the name should be same as that od declared in the above container so that it will use the same volume
+      - name: nginx-html-mount-path # the name should be same as that of declared in the above container so that it will use the same volume
         mountPath: /html # tells container where to mount the volume that is created inside this container
