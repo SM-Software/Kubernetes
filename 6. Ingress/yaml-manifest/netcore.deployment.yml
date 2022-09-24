@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: net-core-api-1
+spec:
+  selector:
+    matchLabels:
+      app: sample-net-core-api--app
+  template:
+    metadata:
+      labels:
+        app: sample-net-core-api--app
+    spec:
+      containers:
+      - name: net-core-api-with-probe-container-1
+        image: sampleapp1:v1
+        readinessProbe: # should determine whether its ready to recieve requests
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP 
+            # limit the use of resource for the pods and containers in the kubernetes cluster
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: greeting-service
+spec:
+  selector:
+    app: sample-net-core-api--app
+  ports:
+  - port: 80
+    targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-management
+spec:
+  selector:
+    matchLabels:
+      app: product_management_Api
+  template:
+    metadata:
+      labels:
+        app: product_management_Api
+    spec:
+      containers:
+      - name: product-management-container
+        image: product_management_api:v1.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-management-api-service-cpr
+spec:
+  selector:
+    app: product_management_Api
+  ports:
+  - port: 80
+    targetPort: 80
