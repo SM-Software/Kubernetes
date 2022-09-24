@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-with-ingress
+  labels:
+    name: my-app-with-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  #- host: <Host>
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/api/products"
+        backend:
+          service:
+            name: product-management-api-service-cpr
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: "/api/greet/"
+        backend:
+          service:
+            name: greeting-service
+            port: 
+              number: 80
